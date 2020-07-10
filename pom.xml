@@ -6,7 +6,11 @@
 
     <groupId>com.tyrival</groupId>
     <artifactId>architect-knowledge</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
+    <modules>
+        <module>02-tomcat/apache-tomcat-8.5.57</module>
+    </modules>
 
 
 </project>
