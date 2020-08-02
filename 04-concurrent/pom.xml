@@ -2,17 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>architect-knowledge</artifactId>
+        <groupId>com.tyrival</groupId>
+        <version>1.0</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tyrival</groupId>
-    <artifactId>architect-knowledge</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0</version>
-    <modules>
-        <module>02-tomcat/apache-tomcat-8.5.57</module>
-        <module>Jetbrain-FK</module>
-        <module>04-concurrent</module>
-    </modules>
+    <artifactId>04-concurrent</artifactId>
 
 
 </project>
