@@ -62,16 +62,6 @@ public class RedisOpsController {
         }
         logger.info("Property set average cost: " + avgCost / 100);
 
-        for (int i = 0; i < 100; i++) {
-            Long start = System.currentTimeMillis() * 1000;
-            User user = new User(i, "tom" + i, i);
-            stringRedisTemplate.opsForValue().set("user:" + user.getId() + ":balance",
-                    String.valueOf(user.getBalance() * 10));
-            Long end = System.currentTimeMillis() * 1000;
-            avgCost += end - start;
-        }
-        logger.info("Property modify average cost: " + avgCost / 100);
-
         avgCost = 0L;
         for (int i = 0; i < 100; i++) {
             Long start = System.currentTimeMillis() * 1000;
@@ -83,6 +73,16 @@ public class RedisOpsController {
             avgCost += end - start;
         }
         logger.info("Property get average cost: " + avgCost / 100);
+
+        for (int i = 0; i < 100; i++) {
+            Long start = System.currentTimeMillis() * 1000;
+            User user = new User(i, "tom" + i, i);
+            stringRedisTemplate.opsForValue().set("user:" + user.getId() + ":balance",
+                    String.valueOf(user.getBalance() * 10));
+            Long end = System.currentTimeMillis() * 1000;
+            avgCost += end - start;
+        }
+        logger.info("One property modify average cost: " + avgCost / 100);
         logger.info("===================");
     }
 }
