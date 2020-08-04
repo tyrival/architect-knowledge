@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class IndexController {
+public class IndexClusterController {
 
-    private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+    private static final Logger logger = LoggerFactory.getLogger(IndexClusterController.class);
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
