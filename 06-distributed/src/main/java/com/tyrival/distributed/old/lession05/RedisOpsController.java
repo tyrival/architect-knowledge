@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,9 @@ public class RedisOpsController {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 对象缓存的性能测试
@@ -84,5 +88,31 @@ public class RedisOpsController {
         }
         logger.info("One property modify average cost: " + avgCost / 100);
         logger.info("===================");
+
+        for (int i = 0; i < 100; i++) {
+            Long start = System.currentTimeMillis() * 1000;
+            User user = new User(i, "tom" + i, i);
+            Map<String, String> map = new HashMap<>();
+            map.put("name", user.getName());
+            map.put("balance", String.valueOf(user.getBalance()));
+            redisTemplate.opsForHash().putAll("user:" + user.getId(), map);
+            Long end = System.currentTimeMillis() * 1000;
+            avgCost += end - start;
+        }
+        logger.info("Hash set average cost: " + avgCost / 100);
+
+        for (int i = 0; i < 100; i++) {
+            Long start = System.currentTimeMillis() * 1000;
+            List<String> keys = new ArrayList<>();
+            keys.add("user:" + i + ":name");
+            keys.add("user:" + i + ":balance");
+            Map map = redisTemplate.opsForHash().entries(keys);
+            Long end = System.currentTimeMillis() * 1000;
+            avgCost += end - start;
+        }
+        logger.info("Hash get average cost: " + avgCost / 100);
+        logger.info("===================");
+
+
     }
 }
