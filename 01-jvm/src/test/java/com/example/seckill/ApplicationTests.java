@@ -1,6 +1,6 @@
 package com.example.seckill;
 
-import com.tyrival.jvm.lession07.Application;
+import com.tyrival.jvm.lesson07.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
