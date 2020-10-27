@@ -12,6 +12,7 @@
         <module>02-tomcat/apache-tomcat-8.5.57</module>
         <module>Jetbrain-FK</module>
         <module>04-concurrent</module>
+        <module>06-distributed</module>
     </modules>
 
 

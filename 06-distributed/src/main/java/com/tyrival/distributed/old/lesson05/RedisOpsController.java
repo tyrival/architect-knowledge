@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -21,6 +22,21 @@ public class RedisOpsController {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @RequestMapping("/test_hash")
+    public void testHash(@RequestParam(value = "count") int count) {
+        Long total = 0L;
+        for (int i = 0; i < count; i++) {
+            Map<String, String> map = new HashMap<>();
+            for (int j = 0; j < 30; j++) {
+                map.put(String.valueOf(j), UUID.randomUUID().toString());
+            }
+            Long start = System.currentTimeMillis();
+            redisTemplate.opsForHash().putAll("collection_" + i, map);
+            Long end = System.currentTimeMillis();
+            total += end - start;
+        }
+        logger.info("Hash set " + count + " cost: " + total);
+    }
     /**
      * 对象缓存的性能测试
      * 1. 以json形式存储
